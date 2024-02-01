@@ -1,0 +1,37 @@
+:root {
+    // Color pallete
+    --primary-blue-extra-dark: #03045E;
+    --primary-blue-dark: #0077B6;
+    --primary-blue: #00B4D8;
+    --primary-blue-light: #90E0EF;
+    --primary-blue-extra-light: #CAF0F8;
+    --blue-zodiac: #0C243C;
+    --tiara: #C9D1D5;
+    --fountain-blue: #55C2C3;
+    --regent-gray: #7E8C9C;
+    --secondary-blue: #009DFF;
+    --secondary-blue-dark: #008CFF;
+    --secondary-blue-light: #00A7CD;
+    --primary-purple: #B471FF;
+    --primary-purple-light: #D991FF;
+    --primary-pink: #FEB1FF;
+    --primary-purple-extra-light: #e0d8eb;
+    --neutral: #FFFFFF;
+    --neutral-dark: #FAEAFF;
+    --primary-green: #00E98D;
+    --primary-green-light: #65BAA9;
+    --primary-green-dark: #00AF86;
+    --primary-red: #FB3030;
+    --primary-yellow: #FFE142;
+
+    // For task priority
+    --low-priority: #00E98D;
+    --medium-priority: #FFE142;
+    --high-priority: #FB3030;
+}
+
+body {
+    background: linear-gradient(90deg, var(--primary-blue-extra-light) -20%, var(--primary-blue-dark) 100%);
+    margin: 0;
+    padding: 0;
+}
