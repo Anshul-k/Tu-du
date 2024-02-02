@@ -162,10 +162,8 @@ function ListItem({
                             </Description>
                         </TaskContainer>
                         <IconContainer>
-                            <IconButton aria-label="check" size="large">
-                                <StyledCheckCircleIcon
-                                    onClick={() => handleEditChange()}
-                                />
+                            <IconButton aria-label="check" size="large"  onClick={() => handleEditChange()}>
+                                <StyledCheckCircleIcon/>
                             </IconButton>
                         </IconContainer>
                     </ListContent>

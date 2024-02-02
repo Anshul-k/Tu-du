@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../Components/Navbar'
 import styled from 'styled-components'
 import '../styles.scss'
@@ -67,6 +67,16 @@ const AddButton = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1rem;
+
+    @media screen and (max-width: 460px){
+            width: 100% ;
+        }
+
+    .Add{
+        @media screen and (max-width: 460px){
+            width: 100% ;
+        }
+    }
 `
 const AddContent = styled.div`
     display: flex;
@@ -78,15 +88,29 @@ const TextArea = styled.div`
     display: flex;
     width: 100%;
 
+    .TextField{
+        width: 100% ;
+    }
+
     @media screen and (max-width: 768px){
         flex-direction: column;
     }
 `
 const TextAreaIcons = styled.div`
     display: flex;
-    width: 100%;
-    justify-content: end;
+    width: auto;
     gap: 1.5rem;
+    margin-left:1rem;
+
+    @media screen and (max-width: 768px){
+        justify-content: start;
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+
+    @media screen and (max-width: 420px){
+        flex-direction: column ;
+    }
 `
 
 function CustomTabPanel(props) {
@@ -146,7 +170,10 @@ function SelectForm(props) {
 
 function Todo() {
 
-    const [categoryList, setCategoryList] = useState([
+    const [categoryList, setCategoryList] = useState(() => {
+        // Retrieve categoryList from localStorage on component mount
+        const storedCategoryList = localStorage.getItem('categoryList');
+        return storedCategoryList ? JSON.parse(storedCategoryList) : [
         {
             id: uuidv4(),
             category: "All"
@@ -167,14 +194,31 @@ function Todo() {
             id: uuidv4(),
             category: "Completed"
         },
-    ])
+    ];
+})
 
     const [taskValue, setTaskValue] = useState("")
     const [descriptionValue, setDescriptionValue] = useState("")
     const [priorityValue, setPriorityValue] = useState("Low")
     const [categoryValue, setCategoryValue] = useState("")
 
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState(() => {
+        // Retrieve todos from localStorage on component mount
+        const storedTodos = localStorage.getItem('todos');
+        return storedTodos ? JSON.parse(storedTodos) : [];
+    });
+
+
+    useEffect(() => {
+        // Save categoryList to localStorage whenever it changes
+        localStorage.setItem('categoryList', JSON.stringify(categoryList));
+    }, [categoryList]);
+
+    useEffect(() => {
+        // Save todos to localStorage whenever it changes
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
+
 
     const [tabValue, setTabValue] = useState(0);
 
@@ -271,6 +315,7 @@ function Todo() {
                                     style={{ flexGrow: 1 }}
                                     label="Task"
                                     variant="standard"
+                                    className="TextField"
                                     required
                                     value={taskValue}
                                     onChange={(e) => setTaskValue(e.target.value)}
@@ -323,6 +368,7 @@ function Todo() {
                                 backgroundHover="--primary-blue-extra-dark"
                                 type="submit"
                                 variant="contained"
+                                className="Add"
                             />
                         </AddButton>
                     </AddContentForm>

@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import WaterFlow from './Components/WaterFlow/WaterFlow';
 
 import "./styles.scss"
 import Home from './Pages/Home';
@@ -15,7 +14,6 @@ function App() {
           <Route exact path="/todo" element={<Todo />} />
         </Routes>
       </Router>
-      {/* <WaterFlow /> */}
     </div>
   );
 }
