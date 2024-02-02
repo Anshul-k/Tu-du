@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import '../styles.scss'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-function ColorButton({ name, color, background, backgroundHover }) {
+function ColorButton({ name, color, background, backgroundHover, type, variant, startIcon, styles, clickfunction }) {
 
     const buttonColor = getComputedStyle(document.documentElement).getPropertyValue(`${color}`).trim();
     const buttonBackground = getComputedStyle(document.documentElement).getPropertyValue(`${background}`).trim();
@@ -33,7 +33,13 @@ function ColorButton({ name, color, background, backgroundHover }) {
 
     return (
         <ThemeProvider theme={theme}>
-            <StyleButton type="submit" variant='contained'>
+            <StyleButton 
+                type={type} 
+                variant={variant}
+                startIcon={startIcon}
+                style={styles}
+                onClick={clickfunction}
+            >
                 {name}
             </StyleButton>
         </ThemeProvider>

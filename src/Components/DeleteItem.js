@@ -39,7 +39,8 @@ const TaskContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding-left: 1rem;
-    border-left: 5px solid var(--primary-green);
+    border-left: 5px solid ${props => props.priority === "High" ? 'var(--high-priority)' : props.priority === "Medium" ? 'var(--medium-priority)' : 'var(--low-priority)'
+    };
     gap: 0.3rem;
 `
 const Task = styled.div`
@@ -95,7 +96,7 @@ function DeleteItem({ addTodo, id, deleteTodo, completeTodo }) {
         <DeleteContainer>
             <DeleteCard>
                 <DeleteContent>
-                    <TaskContainer>
+                    <TaskContainer priority={addTodo.priority}>
                         <Task>
                             {task}
                         </Task>
@@ -105,15 +106,11 @@ function DeleteItem({ addTodo, id, deleteTodo, completeTodo }) {
                         </Description>
                     </TaskContainer>
                     <IconContainer>
-                        <IconButton aria-label="edit" size="large">
-                            <StyledRestoreIcon
-                                onClick={() => completeTodo(id)}
-                            />
+                        <IconButton aria-label="edit" size="large" onClick={() => completeTodo(id)}>
+                            <StyledRestoreIcon/>
                         </IconButton>
-                        <IconButton aria-label="delete" size="large">
-                            <StyledDeleteIcon
-                                onClick={() => deleteTodo(id)}
-                            />
+                        <IconButton aria-label="delete" size="large" onClick={() => deleteTodo(id)}>
+                            <StyledDeleteIcon/>
                         </IconButton>
                     </IconContainer>
                 </DeleteContent>

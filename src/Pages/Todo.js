@@ -12,6 +12,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import ListItem from '../Components/ListItem'
+import AddNewCategory from "../Components/AddNewCategory"
 import DeleteItem from '../Components/DeleteItem'
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
@@ -56,6 +57,10 @@ const AddContentForm = styled.form`
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+    }
 `
 const AddButton = styled.div`
     display: flex;
@@ -72,9 +77,18 @@ const AddContent = styled.div`
 const TextArea = styled.div`
     display: flex;
     width: 100%;
-    justify-content: space-around;
+
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+    }
+`
+const TextAreaIcons = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: end;
     gap: 1.5rem;
 `
+
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -240,6 +254,10 @@ function Todo() {
         setTodos(todos.map(todo => todo.id === id ? { ...todo, todo: { task: updatedTask, description: updatedDescription } } : todo))
     }
 
+    const updateCategories = (value) => {
+        setCategoryList([...categoryList, {id: uuidv4(), category: value}]);
+    }
+
     return (
         <Container>
             <Navbar />
@@ -256,27 +274,36 @@ function Todo() {
                                     required
                                     value={taskValue}
                                     onChange={(e) => setTaskValue(e.target.value)}
-                                />
-                                <SelectForm
-                                    value={priorityValue}
-                                    setfunction={setPriorityValue}
-                                    styleValue={{ minWidth: "6rem" }}
-                                    inputLabel="Priority"
-                                    labelValue="Priority"
-                                >
-                                    <MenuItem value="High">High</MenuItem>
-                                    <MenuItem value="Medium">Medium</MenuItem>
-                                    <MenuItem value="Low">Low</MenuItem>
-                                </SelectForm>
-                                <SelectForm
-                                    value={categoryValue}
-                                    setfunction={setCategoryValue}
-                                    styleValue={{ minWidth: "7rem" }}
-                                    inputLabel="Category"
-                                    labelValue="Category"
-                                >
-                                    {categoryMenuItems}
-                                </SelectForm>
+                                    />
+                                <TextAreaIcons>                                       
+                                    <SelectForm
+                                        value={priorityValue}
+                                        setfunction={setPriorityValue}
+                                        styleValue={{ minWidth: "6rem" }}
+                                        inputLabel="Priority"
+                                        labelValue="Priority"
+                                    >
+                                        <MenuItem value="High">High</MenuItem>
+                                        <MenuItem value="Medium">Medium</MenuItem>
+                                        <MenuItem value="Low">Low</MenuItem>
+                                    </SelectForm>
+                                    <SelectForm
+                                        value={categoryValue}
+                                        setfunction={setCategoryValue}
+                                        styleValue={{ minWidth: "7rem" }}
+                                        inputLabel="Category"
+                                        labelValue="Category"
+                                    >
+                                        {categoryMenuItems}
+                                    </SelectForm>
+                                    <div style={{display: 'flex', justifyContent: 'center', padding: "0.5rem 0"}}>
+                                        <AddNewCategory
+                                            DialogHeading="Add New Category"
+                                            updateCategories={updateCategories}
+                                            existingCategories={categoryList}
+                                        />
+                                    </div>
+                                </TextAreaIcons>
                             </TextArea>
                             <TextArea>
                                 <TextField
@@ -295,6 +322,7 @@ function Todo() {
                                 background="--primary-blue-dark"
                                 backgroundHover="--primary-blue-extra-dark"
                                 type="submit"
+                                variant="contained"
                             />
                         </AddButton>
                     </AddContentForm>

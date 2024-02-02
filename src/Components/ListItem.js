@@ -181,20 +181,14 @@ function ListItem({
                             </Description>
                         </TaskContainer>
                         <IconContainer>
-                            <IconButton aria-label="check" size="large">
-                                <StyledCheckCircleIcon
-                                    onClick={() => completeTodo(id)}
-                                />
+                            <IconButton aria-label="check" size="large" onClick={() => completeTodo(id)}>
+                                <StyledCheckCircleIcon/>
                             </IconButton>
-                            <IconButton aria-label="edit" size="large">
-                                <StyledEditIcon
-                                    onClick={() => editTodo(id)}
-                                />
+                            <IconButton aria-label="edit" size="large" onClick={() => editTodo(id)}>
+                                <StyledEditIcon/>
                             </IconButton>
-                            <IconButton aria-label="delete" size="large">
-                                <StyledDeleteIcon
-                                    onClick={() => deleteTodo(id)}
-                                />
+                            <IconButton aria-label="delete" size="large" onClick={() => deleteTodo(id)}>
+                                <StyledDeleteIcon/>
                             </IconButton>
                         </IconContainer>
                     </ListContent>

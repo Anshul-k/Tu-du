@@ -79,6 +79,8 @@ function Home() {
                             color="--tiara"
                             background="--primary-blue-dark"
                             backgroundHover="--primary-blue-extra-dark"
+                            type="submit"
+                            variant="contained"
                         />
                     </Link>
                 </Description>
