@@ -34,6 +34,10 @@ const DeleteContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (max-width: 460px){
+        flex-direction: column;
+    }
 `
 const TaskContainer = styled.div`
     display: flex;
@@ -42,6 +46,7 @@ const TaskContainer = styled.div`
     border-left: 5px solid ${props => props.priority === "High" ? 'var(--high-priority)' : props.priority === "Medium" ? 'var(--medium-priority)' : 'var(--low-priority)'
     };
     gap: 0.3rem;
+    width: 100% ;
 `
 const Task = styled.div`
     font-size: 1.2rem;
